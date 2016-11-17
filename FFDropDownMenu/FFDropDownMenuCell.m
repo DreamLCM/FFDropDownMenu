@@ -36,7 +36,9 @@
         self.customImageView = customImageView;
         
         UILabel *customTitleLabel = [[UILabel alloc] init];
-        customTitleLabel.font = [UIFont systemFontOfSize:15];
+        //        customTitleLabel.font = [UIFont systemFontOfSize:15];
+        customTitleLabel.font = [UIFont boldSystemFontOfSize:16];
+        customTitleLabel.textColor = [UIColor whiteColor];
         [self addSubview:customTitleLabel];
         self.customTitleLabel = customTitleLabel;
         
@@ -54,9 +56,9 @@
     CGFloat separaterHeight = 1; //底部分割线高度
     
     //图片 customImageView
-    CGFloat imageViewMargin = 3;
-    CGFloat imageViewH = self.frame.size.height - 2 * imageViewMargin;
-    self.customImageView.frame = CGRectMake(10, imageViewMargin, imageViewH, imageViewH);
+    CGFloat imageViewMargin = 4;
+    CGFloat imageViewH = self.frame.size.height - 4 * imageViewMargin;
+    self.customImageView.frame = CGRectMake(10, 2 * imageViewMargin, imageViewH, imageViewH);
     
     //标题
     CGFloat labelX = CGRectGetMaxX(self.customImageView.frame) + 10;

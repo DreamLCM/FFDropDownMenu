@@ -61,7 +61,7 @@
         self.eachMenuItemHeight = 40;
         self.menuRightMargin = 10;
         self.menuItemBackgroundColor = [UIColor whiteColor];
-        self.triangleColor = [UIColor whiteColor];
+        self.triangleColor = [UIColor colorWithRed:90 / 255.0 green:90 / 255.0 blue:90 / 255.0 alpha:1];;
         self.triangleY = 64;
         self.realTriangleY = self.triangleY;
         self.triangleRightMargin = 20;
@@ -76,12 +76,14 @@
         self.isCellCorrect = NO;
         self.isShow = NO;
         
+        self.mainLabel = [[UILabel alloc] init];
+        
         //监听状态栏高度改变的通知<observe statusbar height change notification>
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarHeightChanged:) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
         
         //监听状态栏的旋转<observe statusbar orientation change notification>
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-
+        
         
     }
     return self;
@@ -97,7 +99,7 @@
 //=================================================================
 #pragma mark - 快速实例化一个菜单对象<farst instance>
 
-+ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin {
++ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin menuItemColor:(UIColor *)menuItemColor{
     
     FFDropDownMenuView *menuView = [FFDropDownMenuView new];
     
@@ -106,6 +108,7 @@
     menuView.eachMenuItemHeight = eachItemHeight;
     menuView.menuRightMargin = menuRightMargin;
     menuView.triangleRightMargin = triangleRightMargin;
+    menuView.menuItemBackgroundColor = menuItemColor;
     
     [menuView setup];
     return menuView;
@@ -147,15 +150,18 @@
     //color
     if (self.ifShouldScroll) {
         self.tableView.backgroundColor = self.menuItemBackgroundColor;
+        
     }
     
     else {
-        self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.backgroundColor = self.menuItemBackgroundColor;
+        //        [UIColor colorWithRed:90 / 255.0 green:90 / 255.0 blue:90 / 255.0 alpha:1];
     }
+    
     [self.tableView reloadData];
     
     
-   
+    
 }
 
 
@@ -171,7 +177,7 @@
 /** 状态栏frame的变化 */
 - (void)statusBarHeightChanged:(NSNotification *)note {
     CGRect statusBarFrame = [note.userInfo[UIApplicationStatusBarFrameUserInfoKey] CGRectValue];
-
+    
     //正常的状态栏高度是20
     CGFloat normalStatusBarHeight = 20;
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
@@ -249,7 +255,7 @@ static NSString *const CellID = @"CellID";
                 tableView.layer.anchorPoint = CGPointMake(0.5, 1);
                 break;
             case FFDropDownMenuViewAnimateType_FallFromTop:
-            break;
+                break;
                 
             default:
                 break;
@@ -495,7 +501,7 @@ static NSString *const CellID = @"CellID";
         else if (self.menuAnimateType == FFDropDownMenuViewAnimateType_RollerShutter) {
             [self removeFromSuperview];
         }
-
+        
         
         //=============
         //  从上往下落下
@@ -577,14 +583,14 @@ static NSString *const CellID = @"CellID";
         CGRect tableViewLayerFrame = self.menuContentView.bounds;
         tableViewLayerFrame.origin.y = -tableViewLayerFrame.size.height;
         self.tableView.layer.frame = tableViewLayerFrame;
-
+        
         [UIView animateWithDuration:self.animateDuration animations:^{
             weakSelf.tableView.layer.frame = weakSelf.menuContentView.bounds;
             weakSelf.backgroundColor = FFColor(0, 0, 0, weakSelf.bgColorEndAlpha);
         } completion:^(BOOL finished) {
             [weakSelf menuDidShow];
         }];
-
+        
     }
     
     
@@ -618,7 +624,7 @@ static NSString *const CellID = @"CellID";
 }
 
 - (void)menuDidShow {
-
+    
     if ([self.delegate respondsToSelector:@selector(ffDropDownMenuViewWDidAppear)]) {
         [self.delegate ffDropDownMenuViewWDidAppear];
     }

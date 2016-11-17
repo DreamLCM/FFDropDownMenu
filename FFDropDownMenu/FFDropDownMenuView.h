@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  *
  *  @return An initialized drop-down menu
  */
-+ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin;
++ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin menuItemColor:(UIColor *)menuItemColor;
 
 
 
@@ -178,7 +178,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 
 
-/** 1、下拉菜单模型数组(数组里面存放 FFDropDownMenuBasedModel的子类的对象) 
+/** 1、下拉菜单模型数组(数组里面存放 FFDropDownMenuBasedModel的子类的对象)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
@@ -239,24 +239,24 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat menuRightMargin;
 
-/** 7、菜单选项的背景颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) 
+/** 7、菜单选项的背景颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色)
  *     若是自定义cell,如果在自定义cell中设置了cell中子控件的颜色，这个属性将不起作用
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
  *     drop-down menu item background color (if not assign, default color is white color.)
  *            you can use FFColor(r, g, b, a) to set a color with alpha.
- *     if you use custom cell and you set cell's background color or 
+ *     if you use custom cell and you set cell's background color or
  *            set cell's subview background color, this attribute will be affected
  */
 
 @property (nonatomic, strong) UIColor *menuItemBackgroundColor;
 
-/** 8、三角形颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) 
+/** 8、三角形颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
- *     triangle color (if not assign, default color is white color) 
+ *     triangle color (if not assign, default color is white color)
  *                    you can use FFColor(r, g, b, a) to set a color with alpha)
  */
 @property (nonatomic, strong) UIColor *triangleColor;
@@ -297,7 +297,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGSize triangleSize;
 
-/** 12、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02) 
+/** 12、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02)
  *      背景颜色的透明度就是除去菜单外的灰色蒙板的透明度
  *     -----------------------------------------------------------
  *     English description:
@@ -307,7 +307,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat bgColorbeginAlpha;
 
-/** 13、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2) 
+/** 13、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2)
  *      背景颜色的透明度就是除去菜单外的灰色蒙板的透明度
  *     -----------------------------------------------------------
  *     English description:
@@ -317,7 +317,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat bgColorEndAlpha;
 
-/** 14、动画效果时间(若不设置，默认为0.2) 
+/** 14、动画效果时间(若不设置，默认为0.2)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
@@ -357,6 +357,14 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  *
  */
 @property (nonatomic, weak) id<FFDropDownMenuViewDelegate> delegate;
+
+
+/**
+ *  19.title
+ */
+@property (nonatomic, weak) UILabel * mainLabel;
+
+
 
 /** 初始化(当所有属性调用完毕，一定要调用这个方法)
  */
