@@ -65,7 +65,7 @@
     self.customTitleLabel.frame = CGRectMake(labelX, 0, self.frame.size.width - labelX, self.frame.size.height - separaterHeight);
     
     //分割线
-    self.separaterView.frame = CGRectMake(0, self.frame.size.height - separaterHeight, self.frame.size.width, separaterHeight);
+    self.separaterView.frame = CGRectMake(8, self.frame.size.height - separaterHeight, self.frame.size.width - 16, separaterHeight);
 }
 
 
